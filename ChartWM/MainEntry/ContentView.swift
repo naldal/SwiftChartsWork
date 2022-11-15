@@ -11,7 +11,10 @@ struct ContentView: View {
   private enum Destination {
     case one
     case two
-    case maxAndMinChart
+    case maxMinChart
+    case dailyBar
+    case category
+    case sunShine
     case empty
   }
   
@@ -20,8 +23,16 @@ struct ContentView: View {
   var body: some View {
     NavigationSplitView {
       List(selection: $selection) {
-        Section(header: Text("Charts")) {
-          NavigationLink("Max and Min Chart", value: Destination.maxAndMinChart)
+        Section {
+          NavigationLink(value: Destination.maxMinChart) {
+            MaxMinChartOverview()
+              .frame(height: 95)
+          }
+        }
+        Section {
+          NavigationLink("Daily Bar Chart", value: Destination.dailyBar)
+          NavigationLink("Categorized Chart", value: Destination.category)
+          NavigationLink("Sun Shine Chart", value: Destination.sunShine)
         }
         
         Section(header: Text("Test Navigation Views")) {
@@ -34,7 +45,10 @@ struct ContentView: View {
     } detail: {
       NavigationStack {
         switch selection ?? .empty {
-        case .maxAndMinChart: MaxAndMinChart()
+        case .maxMinChart: MaxMin()
+        case .dailyBar: DailyBar()
+        case .category: CategorizedBarChart()
+        case .sunShine: LineSunshineChart()
         case .one: TestOneView()
         case .two: TestTwoView()
         case .empty: Text("Select data to View")
