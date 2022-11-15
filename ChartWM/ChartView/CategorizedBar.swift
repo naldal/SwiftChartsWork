@@ -40,6 +40,7 @@ struct CategorizedHChartMockup: View {
           .foregroundStyle(by: .value("Shape Color", shape.productCategory))
       }
     }
+    .frame(height: 50)
     .chartForegroundStyleScale([
       "Gizmos": .green,
       "Gadgets": .pink,
@@ -72,13 +73,16 @@ struct CategorizedChartHorizontal: View {
 struct CategorizedBarChart: View {
   var body: some View {
     VStack {
-      Section {
+      Section(content: {
         CategorizedChartVertical()
           .frame(height: 120)
           .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 10))
         CategorizedChartHorizontal()
           .padding(EdgeInsets(top: 10, leading: 10, bottom: 30, trailing: 10))
-      }
+      }, header: {
+        Text("Categorized Charts")
+          .font(.callout)
+      })
     }
   }
 }

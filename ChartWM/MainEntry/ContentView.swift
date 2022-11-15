@@ -9,8 +9,6 @@ import SwiftUI
 
 struct ContentView: View {
   private enum Destination {
-    case one
-    case two
     case maxMinChart
     case dailyBar
     case category
@@ -26,18 +24,18 @@ struct ContentView: View {
         Section {
           NavigationLink(value: Destination.maxMinChart) {
             MaxMinChartOverview()
-              .frame(height: 95)
+              
           }
         }
         Section {
           NavigationLink("Daily Bar Chart", value: Destination.dailyBar)
           NavigationLink("Categorized Chart", value: Destination.category)
-          NavigationLink("Sun Shine Chart", value: Destination.sunShine)
         }
         
-        Section(header: Text("Test Navigation Views")) {
-          NavigationLink("test one", value: Destination.one)
-          NavigationLink("test two", value: Destination.two)
+        Section(header: Text("Sun Shine Chart")) {
+          NavigationLink(value: Destination.sunShine) {
+            LineSunshineCityChart(data: LocationData.last12Months)
+          }
         }
       }
       .navigationTitle("Charts")
@@ -48,9 +46,7 @@ struct ContentView: View {
         case .maxMinChart: MaxMin()
         case .dailyBar: DailyBar()
         case .category: CategorizedBarChart()
-        case .sunShine: LineSunshineChart()
-        case .one: TestOneView()
-        case .two: TestTwoView()
+        case .sunShine: LineSunshineChart(data: LocationData.last12Months)
         case .empty: Text("Select data to View")
         }
       }

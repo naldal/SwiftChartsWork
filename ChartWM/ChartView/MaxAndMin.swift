@@ -10,19 +10,26 @@ import SwiftUI
 
 struct MaxMinChartOverview: View {
   var body: some View {
-    Chart {
-      ForEach(MockData.last12Months, id: \.month) {
-        RectangleMark (
-          x: .value("Month", $0.month, unit: .month),
-          yStart: .value("Min Salse", 0),
-          yEnd: .value("Max Sales", $0.dailyMax),
-          width: .automatic
-        )
-        .opacity(0.3)
+    VStack(alignment: .leading) {
+      Text("BarChart With Min to Max")
+        .font(.callout)
+        .foregroundStyle(.secondary)
+      
+      Chart {
+        ForEach(MockData.last12Months, id: \.month) {
+          RectangleMark (
+            x: .value("Month", $0.month, unit: .month),
+            yStart: .value("Min Salse", 0),
+            yEnd: .value("Max Sales", $0.dailyMax),
+            width: .automatic
+          )
+          .opacity(0.3)
+        }
       }
+      .frame(height: 95)
+      .chartXAxis(.hidden)
+      .chartYAxis(.hidden)
     }
-    .chartXAxis(.hidden)
-    .chartYAxis(.hidden)
   }
 }
 
