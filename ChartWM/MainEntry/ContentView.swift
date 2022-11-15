@@ -35,6 +35,7 @@ struct ContentView: View {
         Section(header: Text("Sun Shine Chart")) {
           NavigationLink(value: Destination.sunShine) {
             LineSunshineCityChart(data: LocationData.last12Months)
+              .frame(height: 200)
           }
         }
       }
